@@ -44,6 +44,7 @@ Additionally, the _Rshell_ has its own built-in `EXIT` command for exiting the s
 EXIT
 ```
 
+__NOTE:__ There are two Makefiles in our rshell repository. However, following the assignment specifications, there is only one contained within the Root directory. The other is inside /src/ and solely involves compiling the source files. The main Makefile, again within root, handles properly organizing the executable inside /bin. Our repository is set up so that the program will still build and run according to the specifications.
 
 
 ## Known Bugs
