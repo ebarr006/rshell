@@ -1,0 +1,5 @@
+echo testing MULTIPLE COMMANDS
+echo hello; ls -a && echo world || mkdir test
+mkdir testDirectory || echo failed to make directory
+ls -a && rm -rf testDirectory && echo DELETING TESTDIRECTORY
+ls -a || echo did this fail???; echo DELETED TESTDIRECTORY

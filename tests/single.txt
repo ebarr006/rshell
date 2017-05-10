@@ -1,0 +1,4 @@
+echo HELLO WORLD!
+echo Testing single commands
+ls -a
+cat single.txt

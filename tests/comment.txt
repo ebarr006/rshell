@@ -1,0 +1,3 @@
+echo hello #world -- world should not print!!
+ls -a #&& echo IF THIS PRINTS ITS BROKEN
+echo This is a sentence with a #comment

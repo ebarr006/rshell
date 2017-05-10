@@ -1,0 +1,6 @@
+echo Echo-ing a command to signal beginning of test
+echo Listing directory...
+ls
+echo "RUNNING EXIT CMD NOW"
+echo Exiting...
+EXIT
