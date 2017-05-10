@@ -10,7 +10,7 @@ You must have the _C++ Boost Library_ installed before continuing.
 
 Clone and setup the _Rshell_ using the following commands:
 ```console
-git clone  https://github.com/yourusername/rshell.git
+git clone  https://github.com/ebarr006/rshell.git
 cd rshell
 git checkout hw2
 make
