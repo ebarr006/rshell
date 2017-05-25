@@ -7,6 +7,7 @@
 #include "Or.h"
 #include "Semi.h"
 #include "Command.h"
+#include "ParseIterator.h"
 
 class Parser {
     protected:
@@ -14,6 +15,7 @@ class Parser {
         Expression* root;
         
     public:
+        
         // c'tors
         Parser();
         Parser(std::string s);
@@ -24,9 +26,7 @@ class Parser {
     
     private:
         // helper functions
-        size_t findSpecialString(size_t startingPos, std::string& specialString);
-        bool isAllSpaces(std::string s);
-        std::string substr2(std::string &s, size_t start, size_t end);
+        bool createTree(ParseIterator &i, Expression*& subroot, bool isSubTree);
 };
 
 #endif

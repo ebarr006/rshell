@@ -10,6 +10,7 @@ class Expression {
         virtual ~Expression() {};
         virtual bool execute() = 0;
         virtual bool addChild(Expression* e) = 0;
+        virtual Expression*& getRight() = 0;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define COMMAND_H
 
 #include "Expression.h"
+#include "CommandRunner.h"
 #include <cstdlib>
 #include <string.h>
 #include <vector>
@@ -18,13 +19,18 @@ class Command : public Expression {
     
     private:
         char** argArray;
+        unsigned argSize;
         std::vector<std::string> argVector;
+        
+        // Because getRight needs a variable, we create this dummy variable (I know, it doesn't make sense.)
+        Expression* dummy;
     
     public:
         Command(std::string);
         ~Command();
         virtual bool execute();
         virtual bool addChild(Expression* e);
+        virtual Expression*& getRight();
     
 };
 

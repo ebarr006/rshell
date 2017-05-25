@@ -13,6 +13,7 @@ class Connector : public Expression {
         virtual ~Connector() {}
         virtual bool execute() = 0;
         virtual bool addChild(Expression* e);
+        virtual Expression*& getRight();
 };
 
 #endif

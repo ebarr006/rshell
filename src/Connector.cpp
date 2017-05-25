@@ -15,3 +15,7 @@ bool Connector::addChild(Expression *e) {
         return false;
     }
 }
+
+Expression*& Connector::getRight() {
+    return right;
+}

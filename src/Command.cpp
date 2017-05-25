@@ -2,9 +2,14 @@
 
 // Converts string into a char array that execvp() can work with
 Command::Command(std::string cmd) {
-    Separator sep(" ");
+    Separator sep(" []");
     Tokenizer tok(cmd, sep);
     this->argVector.clear();
+    
+    if(cmd.find('[') != std::string::npos && cmd.find(']') != std::string::npos) {
+        this->argVector.push_back("test");
+    }
+    
     
     for(Tokenizer::iterator it = tok.begin(); it != tok.end(); ++it) {
         this->argVector.push_back(*it);
@@ -16,6 +21,8 @@ Command::Command(std::string cmd) {
     for(unsigned i = 0; i < this->argVector.size(); ++i) {
         this->argArray[i] = (char*) argVector.at(i).c_str();
     }
+    
+    argSize = this->argVector.size();
     
 }
 
@@ -29,38 +36,24 @@ Command::~Command() {
 // Executes bash/built-in command
 bool Command::execute() {
     
-    // built-in commands
+    
+    CommandRunner* runner = nullptr;
+    
+    // exit command
     if(strcmp(argArray[0], "EXIT") == 0) {
-        std::cout << "Exited Rshell." << std::endl;
-        exit(0);
+        runner = new Exit_Runner(argArray, argSize);
+    } 
+    // test command
+    else if(strcmp(argArray[0], "test") == 0) {
+        runner = new Test_Runner(argArray, argSize);
     }
-    
-    
-    
-    
-    
-    
-    // bash/linux commands
-    int status = 0;
-    pid_t pid = fork();
-    
-    if(pid == 0) {
-        execvp(argArray[0], argArray);
-        perror("Command error");
-        return false;
-    }
-    else if(pid > 0) {
-        waitpid(-1, &status, 0);
-        return true;
-    }
+    // bash commands
     else {
-        std::cout << "ERROR: Fork failed unexpectedly. Exiting immediately." << std::endl;
-        exit(1);
+        runner = new Bash_Runner(argArray, argSize);
     }
     
-    
-    
-    return false;
+    return runner->execute();
+
 }
 
 
@@ -68,5 +61,9 @@ bool Command::execute() {
 // If called, return an error signal of FALSE, since a Command cannot have children.
 bool Command::addChild(Expression* e) {
     return false;
+}
+
+Expression*& Command::getRight() {
+    return dummy;
 }
 
