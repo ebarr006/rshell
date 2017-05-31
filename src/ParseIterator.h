@@ -102,6 +102,66 @@ class ParseIterator {
             return pos == std::string::npos || line.size() == 0 || pos >= line.size();
         }
         
+        // Same as advance()
+        void operator++() {
+            advance();
+        }
+        
+        // Checks for exceptions
+        bool valid() {
+            ExType curr = currentExType();
+            if( (last == OPEN_PAREN  && curr == CONNECTOR       ) ||
+                (last == CONNECTOR   && curr == CLOSE_PAREN     ) ||
+                (last == OPEN_PAREN  && curr == CLOSE_PAREN     ) ||
+                (last == CLOSE_PAREN && curr == OPEN_PAREN      ) ||
+                (last == CONNECTOR   && curr == CONNECTOR       ) ||
+                (last == COMMAND     && curr == COMMAND         ) ||
+                (last == COMMAND     && curr == OPEN_PAREN      ) ||
+                (last == CLOSE_PAREN && curr == COMMAND         ) ||
+                (last == NONE        && curr == CLOSE_PAREN     ) ||
+                (last == NONE        && curr == CONNECTOR       )
+            )
+            {
+                if( (last == OPEN_PAREN  && curr == CONNECTOR       ) ){ std::cout << "open before connect" << std::endl; }
+                if( (last == CONNECTOR   && curr == CLOSE_PAREN     ) ){ std::cout << "connect before close" << std::endl; }
+                if( (last == OPEN_PAREN  && curr == CLOSE_PAREN     ) ){ std::cout << "open before close" << std::endl; }
+                if( (last == CLOSE_PAREN && curr == OPEN_PAREN      ) ){ std::cout << "close before open" << std::endl; }
+                if( (last == CONNECTOR   && curr == CONNECTOR       ) ){ std::cout << "connect before connect" << std::endl; }
+                if( (last == COMMAND     && curr == COMMAND         ) ){ std::cout << "command before command" << std::endl; }
+                if( (last == COMMAND     && curr == OPEN_PAREN      ) ){ std::cout << "command before open" << std::endl; }
+                if( (last == CLOSE_PAREN && curr == COMMAND         ) ){ std::cout << "close before command" << std::endl; }
+                if( (last == NONE        && curr == CLOSE_PAREN     ) ){ std::cout << "none before close" << std::endl; }
+                if( (last == NONE        && curr == CONNECTOR       ) ){ std::cout << "none before connect" << std::endl; }
+                
+                return false;
+                
+            }
+            return true;
+        }
+        
+        // Checks if at the start of tree/substree
+        bool atStart() {
+            return !treeStarted;
+        }
+        
+        
+        bool isBalanced() {
+            return (parenBalance == 0);
+        }
+    
+    protected:
+    
+        // Converts an ExType to string for debugging
+        std::string ExType_to_String(ExType e) {
+            if(e == COMMAND) { return "COMMAND"; }
+            if(e == CONNECTOR) { return "CONNECTOR"; }
+            if(e == OPEN_PAREN) { return "OPEN_PAREN"; }
+            if(e == CLOSE_PAREN) { return "CLOSE_PAREN"; }
+            if(e == NONE) { return "NONE"; }
+            return "BLEH";
+        }
+        
+        
         // Java-like substring method
         std::string substr2(std::string &s, size_t start, size_t end) {
             if(end == std::string::npos) 
@@ -146,62 +206,6 @@ class ParseIterator {
                 }
             }
             return true;
-        }
-        
-        // Same as advance()
-        void operator++() {
-            advance();
-        }
-        
-        // Checks for exceptions
-        bool valid() {
-            ExType curr = currentExType();
-            if( (last == OPEN_PAREN  && curr == CONNECTOR       ) ||
-                (last == CONNECTOR   && curr == CLOSE_PAREN     ) ||
-                (last == OPEN_PAREN  && curr == CLOSE_PAREN     ) ||
-                (last == CLOSE_PAREN && curr == OPEN_PAREN      ) ||
-                (last == CONNECTOR   && curr == CONNECTOR       ) ||
-                (last == COMMAND     && curr == COMMAND         ) ||
-                (last == COMMAND     && curr == OPEN_PAREN      ) ||
-                (last == CLOSE_PAREN && curr == COMMAND         ) ||
-                (last == NONE        && curr == CLOSE_PAREN     ) ||
-                (last == NONE        && curr == CONNECTOR       )
-            )
-            {
-                if( (last == OPEN_PAREN  && curr == CONNECTOR       ) ){ std::cout << "open before connect" << std::endl; }
-                if( (last == CONNECTOR   && curr == CLOSE_PAREN     ) ){ std::cout << "connect before close" << std::endl; }
-                if( (last == OPEN_PAREN  && curr == CLOSE_PAREN     ) ){ std::cout << "open before close" << std::endl; }
-                if( (last == CLOSE_PAREN && curr == OPEN_PAREN      ) ){ std::cout << "close before open" << std::endl; }
-                if( (last == CONNECTOR   && curr == CONNECTOR       ) ){ std::cout << "connect before connect" << std::endl; }
-                if( (last == COMMAND     && curr == COMMAND         ) ){ std::cout << "command before command" << std::endl; }
-                if( (last == COMMAND     && curr == OPEN_PAREN      ) ){ std::cout << "command before open" << std::endl; }
-                if( (last == CLOSE_PAREN && curr == COMMAND         ) ){ std::cout << "close before command" << std::endl; }
-                if( (last == NONE        && curr == CLOSE_PAREN     ) ){ std::cout << "none before close" << std::endl; }
-                if( (last == NONE        && curr == CONNECTOR       ) ){ std::cout << "none before connect" << std::endl; }
-                
-                return false;
-                
-            }
-            return true;
-        }
-        
-        // Checks if at the start of tree/substree
-        bool atStart() {
-            return !treeStarted;
-        }
-        
-        // Converts an ExType to string for debugging
-        std::string ExType_to_String(ExType e) {
-            if(e == COMMAND) { return "COMMAND"; }
-            if(e == CONNECTOR) { return "CONNECTOR"; }
-            if(e == OPEN_PAREN) { return "OPEN_PAREN"; }
-            if(e == CLOSE_PAREN) { return "CLOSE_PAREN"; }
-            if(e == NONE) { return "NONE"; }
-            return "BLEH";
-        }
-        
-        bool isBalanced() {
-            return (parenBalance == 0);
         }
 };
 
