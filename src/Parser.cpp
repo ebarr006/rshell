@@ -46,7 +46,7 @@ bool Parser::parse(Expression*& express) {
     ParseIterator it(0, line);
     
     bool success = createTree(it, root, false);
-    if(success && it.isBalanced()) 
+    if(success && it.isBalanced()) {
         express = root;
         return true;
     }
