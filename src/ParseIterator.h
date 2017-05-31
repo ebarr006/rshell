@@ -15,7 +15,12 @@ class ParseIterator {
         int parenBalance;
     
     public:
-        ParseIterator(size_t start, std::string &l) : pos(start), line(l), last(NONE), treeStarted(false), parenBalance(0) {}
+        ParseIterator(size_t start, std::string &l) : pos(start), 
+                                                      line(l), 
+                                                      last(NONE), 
+                                                      treeStarted(false), 
+                                                      parenBalance(0) 
+        {}
         
         // Advances the iterator to the next Expression token (i.e. command, connector, parentheses...)
         void advance() {
@@ -179,9 +184,13 @@ class ParseIterator {
             
             
             std::vector<std::string> specialStrings = { "&&", "||", ";", "(", ")"};
+            
+            /*
             size_t m = std::string::npos;
             std::string encounter;
+            */
             
+            /*
             for(std::string s: specialStrings) {
                 size_t f = line.find(s, startingPos);
                 if(f != std::string::npos && ((f < m) || (m == std::string::npos))) {
@@ -189,12 +198,35 @@ class ParseIterator {
                     encounter = s;
                 }
             }
+            */
             
+            // NEW START
+            bool inQuote = false;
+            
+            for(size_t i = startingPos; i < line.size(); ++i) {
+                if(line.at(i) == '\"') {
+                    inQuote = !inQuote;
+                }
+                if(!inQuote) {
+                    for(std::string s : specialStrings) {
+                        if(line.substr(i, s.length()) == s) {
+                            specialString = s;
+                            return i;
+                        }
+                    }
+                }
+            }
+            
+            return std::string::npos;
+            // NEW END
+            
+            /*
             if(m != std::string::npos) {
                 specialString = encounter;
             }
             
             return m;
+            */
             
         }
         

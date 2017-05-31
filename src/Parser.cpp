@@ -64,6 +64,7 @@ bool Parser::parse(Expression*& express) {
 }
 
 bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) {
+    
     for(; !i.done(); ++i) {
         
         // Check exceptions

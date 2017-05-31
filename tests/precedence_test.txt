@@ -1,0 +1,38 @@
+echo ----------------------------------------
+echo            TESTING -e FLAG
+echo --------------- Case 1 -----------------
+echo testing -e bin/rshell, expecting file exists and true
+test -e bin/rshell && echo FILE EXISTS!
+echo --------------- Case 2 -----------------
+echo testing -e src, expecting directory exists and true
+test -e src && echo DIRECTORY EXISTS!
+echo --------------- Case 3 -----------------
+echo testing -e src/random_file.cpp, expecting file does not exist and false
+test -e src/random_file.cpp || echo FILE DOES NOT EXIST!
+
+
+echo ----------------------------------------
+echo            TESTING -f FLAG      
+echo --------------- Case 1 -----------------
+echo testing -f flag against bin directory, test -f bin, expecting false
+test -f bin
+echo --------------- Case 2 -----------------
+echo testing test -f bin/rshell, expecting file exists and true
+test -f bin/rshell && echo FILE EXISTS!
+echo --------------- Case 3 -----------------
+echo testing test -f src/Command.h, expecting file exists and true
+test -f src/Command.h && echo FILE EXISTS!
+
+echo ----------------------------------------
+echo            TESTING -d FLAG
+echo --------------- Case 1 -----------------
+echo testing -d against a file, test -d src/Command.h, expecting false
+test -d src/Command.h
+echo --------------- Case 2 -----------------
+echo testing test -d bin, expecting directory exists and true
+test -d bin && echo DIRECTORY EXISTS
+echo --------------- Case 3 -----------------
+echo testing test -d tests, expecting directory exists and true
+echo -d tests && echo DIRECTORY EXISTS
+
+

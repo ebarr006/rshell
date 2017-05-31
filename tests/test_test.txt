@@ -1,0 +1,28 @@
+echo ----------------------------------------
+echo 		TESTING test COMMAND
+echo --------------- Case 1 -----------------
+echo testing bin/rshell, expecting file exists and true
+test bin/rshell && echo FILE EXISTS!
+echo --------------- Case 2 -----------------
+echo testing src, expecting directory exists and true
+test src && echo DIRECTORY EXISTS!
+echo --------------- Case 3 -----------------
+echo testing src/Parser.cpp, expecting file exists and true
+test src/Parser.cpp && echo FILE EXISTS!
+echo --------------- Case 4 -----------------
+echo testing src/nonexistant_file.cpp, expecting file does not exist and false
+test src/nonexistant_file.cpp || echo FILE DOES NOT EXIST!
+echo ----------------------------------------
+echo ----------------------------------------
+echo 	    TESTING BRACKET FUNCTIONALITY
+echo --------------- Case 1 -----------------
+echo Soley bracket usage, expecting file exists and true
+[ tests/test_test.txt ] && echo FILE EXISTS
+echo --------------- Case 2 -----------------
+echo Soley bracket usage, expecting directory exists and true
+[ /bin ] && echo DIRECTORY EXISTS
+echo --------------- Case 3 -----------------
+echo Soley bracket usage, expecting directory does not exist and false
+[ /fake_dir ] || echo DIRECTORY DOES NOT EXIST
+
+
