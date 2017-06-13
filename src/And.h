@@ -2,7 +2,6 @@
 #define AND_H
 
 #include "Connector.h"
-#include <iostream>
 
 class And : public Connector {
     public:

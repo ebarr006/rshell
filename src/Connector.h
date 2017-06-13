@@ -2,6 +2,7 @@
 #define CONNECTOR_H
 
 #include "Expression.h"
+#include <iostream>
 
 class Connector : public Expression {
     protected:
@@ -14,6 +15,7 @@ class Connector : public Expression {
         virtual bool execute() = 0;
         virtual bool addChild(Expression* e);
         virtual Expression*& getRight();
+        
 };
 
 #endif

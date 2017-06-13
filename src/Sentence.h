@@ -1,37 +1,41 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef SENTENCE_H
+#define SENTENCE_H
 
 #include "Expression.h"
-#include "CommandRunner.h"
 #include <cstdlib>
 #include <string.h>
 #include <vector>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <iostream>
 #include <boost/tokenizer.hpp>
+#include "Phrase.h"
 
-typedef boost::char_separator<char> Separator;
-typedef boost::tokenizer<Separator> Tokenizer;
-
-class Command : public Expression {
+class Sentence : public Expression {
     
     private:
-        char** argArray;
-        unsigned argSize;
-        std::vector<std::string> argVector;
-        
+        std::vector<Phrase*> Brian;
         // Because getRight needs a variable, we create this dummy variable (I know, it doesn't make sense.)
         Expression* dummy;
+
     
     public:
-        Command(std::string);
-        ~Command();
+        Sentence(){};
+        ~Sentence();
         virtual bool execute();
         virtual bool addChild(Expression* e);
         virtual Expression*& getRight();
-    
+        void addPhrase(Phrase* p);
+        bool empty();
+        
+        int testRunner(char** argArray, unsigned argSize);
+        int exitRunner(char** argArray, unsigned argSize);
+        int bashRunner(char** argArray, unsigned argSize);
+        
+
 };
 
 #endif

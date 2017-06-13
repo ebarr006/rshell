@@ -10,6 +10,7 @@ rshell:
 	mkdir -p ./bin
 	cd src && make
 	$(CC) src/*.o -o ./bin/$(EXEC)
+	
 clean:
 	cd src && make clean
 	rm -f ./bin/$(EXEC) $(OBJECTS)

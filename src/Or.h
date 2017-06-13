@@ -2,7 +2,6 @@
 #define OR_H
 
 #include "Connector.h"
-#include <iostream>
 
 class Or : public Connector {
     public:

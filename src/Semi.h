@@ -2,7 +2,6 @@
 #define SEMI_H
 
 #include "Connector.h"
-#include <iostream>
 
 class Semi : public Connector {
     public:
