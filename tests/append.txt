@@ -20,3 +20,4 @@ echo EXPECTING: nothing printed to console, check content of wawa.txt
 echo RUNNING: cat wawa.txt && cat wawa.txt
 echo EXPECTING: rshell, newline, dashed lines, newline, and contents of hw4.json printed to console
 echo ----------------------------------------
+rm wawa.txt

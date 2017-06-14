@@ -13,3 +13,4 @@ ifconfig > wawa.txt
 echo EXPECTING: wawa.txt to be overwritten with results of ifconfig
 echo printing contents of wawa.txt ...
 cat wawa.txt
+rm wawa.txt
