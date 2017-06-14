@@ -1,4 +1,4 @@
-echo ----------------------------------------
+echo "----------------------------------------"
 echo            TESTING -e FLAG
 echo --------------- Case 1 -----------------
 echo testing -e bin/rshell, expecting file exists and true
@@ -11,7 +11,7 @@ echo testing -e src/random_file.cpp, expecting file does not exist and false
 test -e src/random_file.cpp || echo FILE DOES NOT EXIST!
 
 
-echo ----------------------------------------
+echo "----------------------------------------"
 echo            TESTING -f FLAG      
 echo --------------- Case 1 -----------------
 echo testing -f flag against bin directory, test -f bin, expecting false
@@ -23,7 +23,7 @@ echo --------------- Case 3 -----------------
 echo testing test -f src/Command.h, expecting file exists and true
 test -f src/Command.h && echo FILE EXISTS!
 
-echo ----------------------------------------
+echo supercalifragilisticexpialidocious-supercalifragilisticexpalidocafdsfsfsafsdfsdafioussupercalifragilisticexpialidocious 
 echo            TESTING -d FLAG
 echo --------------- Case 1 -----------------
 echo testing -d against a file, test -d src/Command.h, expecting false

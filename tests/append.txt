@@ -1,0 +1,22 @@
+echo ------------------------------
+echo 	  APPENDING REDIRECTED OUTPUT
+echo ------------------------------
+echo Creating empty file wawa.txt && touch wawa.txt
+echo --------------- Case 1 -----------------
+echo RUNNING: ls bin > wawa.txt && echo Results:
+ls bin > wawa.txt
+echo EXPECTING: nothing printed to console. check contents of wawa.txt
+cat wawa.txt
+echo EXPECTING: "rshell"
+echo --------------- Case 2 -----------------
+echo Now we will append data to existing content in wawa.txt
+echo RUNNING: echo --------- >> wawa.txt && echo --------- >> wawa.txt
+echo EXPECTING: nothing printed to console, echo prints the dashed lines to wawa.txt
+echo Checking contents of wawa.txt.. EXPECTING: previous contents with a line underneath
+cat wawa.txt
+echo --------------- Case 3 -----------------
+echo Last we will append hw4.json to existing content in wawa.txt
+echo EXPECTING: nothing printed to console, check content of wawa.txt
+echo RUNNING: cat wawa.txt && cat wawa.txt
+echo EXPECTING: rshell, newline, dashed lines, newline, and contents of hw4.json printed to console
+echo ----------------------------------------

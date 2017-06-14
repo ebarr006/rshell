@@ -52,9 +52,9 @@ Tests
 test -d DonutShop/finances/revenue
 [DonutShop/finances/revenue/Q1.xls]
 ```
-However, _Rshell_ currently __does not support piping__. For example, the following line would fail:
+Piping
 ```console
-ls -a > myTextFile
+cat < file | tr a-z A-Z | wc > outFile
 ```
 
 
@@ -72,8 +72,8 @@ __NOTE:__ There are two Makefiles in our rshell repository. However, following t
 
 
 ## Known Bugs
-1. Piping is not supported
-2. Sometimes, `EXIT` won't work
+1. Sometimes, `EXIT` won't work
+2. Sometimes, quotes are needed when calling echo
 
 ## License
 GNU General Public License v3.0

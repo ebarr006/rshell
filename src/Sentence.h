@@ -1,3 +1,7 @@
+/*
+    Description: A SENTENCE consists of multiple PHRASES connected by pipes.
+*/
+
 #ifndef SENTENCE_H
 #define SENTENCE_H
 

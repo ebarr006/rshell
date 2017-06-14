@@ -1,0 +1,15 @@
+echo "----------------------------------------"
+echo 		  INPUT REDIRECTION
+echo --------------- Case 1 -----------------
+echo RUNNING: wc *left arrow* Makefile AND echo Results:
+wc < Makefile
+echo expecting: 16  32 253
+echo --------------- Case 2 -----------------
+echo RUNNING: tr a-z A-Z *left arrow* Makefile AND tr a-z A-Z < Makefile
+echo EXPECTING: Makefile printed in all capital letters..
+echo --------------- Case 3 -----------------
+echo RUNNING: cat *left arrow* hw4.json
+cat < hw4.json
+echo EXPECTING: contents of hw4.json printed out to console.
+echo -------------------------------------------
+

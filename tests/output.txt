@@ -1,0 +1,15 @@
+echo ---------------------------------
+echo 		  OUTPUT REDIRECTION
+echo ------------ Case 1 -------------
+echo RUNNING: cat hw4.json *right arrow* wawa.txt
+cat hw4.json > wawa.txt
+echo EXPECTING: no output to console, contents inside wawa.txt
+echo printing contents of wawa.txt... expecting hw4.json printed
+chmod 751 wawa.txt
+cat wawa.txt
+echo ------------ Case 2 -------------
+echo RUNNING: ifconfig *right arrow* wawa.txt
+ifconfig > wawa.txt
+echo EXPECTING: wawa.txt to be overwritten with results of ifconfig
+echo printing contents of wawa.txt ...
+cat wawa.txt

@@ -1,0 +1,18 @@
+echo ------------------------------
+echo         PIPE TEST
+echo -------- Case 1 ---------
+echo RUNNING: ifconfig *pipe* grep inet
+ifconfig | grep inet
+echo EXPECTING: only ifconfig results containing "inet" in the line
+echo -------- Case 2 ---------
+echo RUNNING: ifconfig *pipe* grep inet *pipe* tr a-z A-Z
+ifconfig | grep inet | tr a-z A-Z
+echo EXPECTING: the previous results, but all capitalized
+echo -------- Case 3 ---------
+echo RUNNING: ifconfig *pipe* grep inet *right arrow* wawa.txt
+ifconfig | grep inet > wawa.txt
+echo EXPECTING: the previous results, not capitalized, placed in wawa.txt
+echo printing contents of wawa
+chmod 751 wawa.txt
+cat wawa.txt
+rm wawa.txt

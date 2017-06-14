@@ -42,12 +42,11 @@ bool Parser::parse(Expression*& express) {
     
     delete root;
     root = express = nullptr;
-    
+
     ParseIterator it(0, line);
-    
+
     bool success = createTree(it, root, false);
-    
-    
+
     if(success && isBalanced()) {
         express = root;
         return true;
@@ -98,6 +97,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
             std::cout << "Parse: Syntax error! " << stri << std::endl;
             delete sentence;
             delete phrase;
+            sentence = nullptr;
+            phrase = nullptr;
             return false;
         }
         
@@ -118,6 +119,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
                     if(phrase->argArray != nullptr) {       //Checks if argArray already contains a command
                         delete sentence;
                         delete phrase;
+                        sentence = nullptr;
+                        phrase = nullptr;
                         return false;
                     }
                     else {
@@ -188,6 +191,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
                         std::cout << "Parse error: Missing closing parentheses! " << stri << std::endl;
                         delete sentence;
                         delete phrase;
+                        sentence = nullptr;
+                        phrase = nullptr;
                     }
                     return false;
                 }
@@ -201,6 +206,10 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
                     if(phrase != nullptr) {
                         if(phrase->argArray == nullptr) {
                             std::cout << "Parse: Syntax error! No command!" << std::endl;
+                            delete sentence;
+                            delete phrase;
+                            sentence = nullptr;
+                            phrase = nullptr;
                             return false;
                         }
                         sentence->addPhrase(phrase);
@@ -238,6 +247,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
     if(isSubTree) { 
         delete sentence;
         delete phrase;
+        sentence = nullptr;
+        phrase = nullptr;
         return false;  // ...but our subtree is missing a closing parentheses. Return false.
     }  
     else {  
@@ -250,6 +261,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
                     std::cout << "Parse: Syntax error! No command!" << std::endl;
                     delete sentence;
                     delete phrase;
+                    sentence = nullptr;
+                    phrase = nullptr;
                     return false;
                 }
                 sentence->addPhrase(phrase);
@@ -271,6 +284,8 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
             std::cout << "Parse: Syntax error! Connector at end of line!" << std::endl;
             delete sentence;
             delete phrase;
+            sentence = nullptr;
+            phrase = nullptr;
             return false;
         }
         
@@ -284,7 +299,7 @@ bool Parser::createTree(ParseIterator &i, Expression*& subroot, bool isSubTree) 
 }
 
 
-//Checks if adjacent exTypes are compatible
+// Checks if adjacent exTypes are compatible
 bool Parser::valid(ExType last, ExType current) {
             
     if     ( (last == OPEN_PAREN         && current == CONNECTOR    ) ){ std::cout << "open before connect" << std::endl; }
@@ -307,6 +322,7 @@ bool Parser::valid(ExType last, ExType current) {
 }
 
 
+// Converts ExType to string (for debugging)
 std::string Parser::ExType_to_String(ExType e) {
     if(e == COMMAND) { return "COMMAND"; }
     if(e == CONNECTOR) { return "CONNECTOR"; }
@@ -322,6 +338,7 @@ std::string Parser::ExType_to_String(ExType e) {
 }
 
 
+// Dynamically allocates and creates an argument array from a string
 char** Parser::createArgArray_FromString(std::string cmd, int &argSize) {
     
     typedef boost::char_separator<char> Separator;
